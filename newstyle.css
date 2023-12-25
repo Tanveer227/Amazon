@@ -1,0 +1,211 @@
+body {
+    background-color: #afdeb6;
+}
+.box {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#herosec {
+    margin-top: 0;
+    height: 310px;
+    background-image: url(images/71Ie3JXGfVL._SX3000_.jpg);
+    background-size: cover;
+    display: flex;
+}
+#message {
+    font-size: 15px;
+    position: relative;
+    margin:20px;
+    width: 98%;
+    align-self: flex-end;
+}
+#message p {
+    display: flex;
+    height: 40px;
+    background-color: white;
+}
+#message a {
+    text-decoration: none;
+    color: #007185;
+}
+#message a:hover {
+    text-decoration: underline;
+}
+#content {
+    padding-left: 5px;
+    display: flex;
+    padding-right: 5px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.cbox {
+    width: 23.5%;
+    margin-bottom: 20px;
+    height: 420px;
+    background-color: #ffffff;
+}
+.cboxt {
+    height: 27px;
+    margin: 15px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: 700;
+}
+.cboxin {
+    display: flex;
+    width: 90%;
+    margin: 5%;
+    margin-bottom: 4%;
+    height: 75%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.conop {
+    height: 48%;
+    width: 48%;
+    margin: 1%;
+    text-decoration: none;
+    display: flex;
+}
+#head {
+    background-image: url(images/Fuji_Quad_Headset_1x._SY116_CB667159060_.jpg);
+    background-size: cover;
+}
+#key {
+    background-image: url(images/Fuji_Quad_Keyboard_1x._SY116_CB667159063_.jpg);
+    background-size: cover;
+}
+#mouse {
+    background-image: url(images/Fuji_Quad_Mouse_1x._SY116_CB667159063_.jpg);
+    background-size: cover;
+}
+#chair {
+    background-image: url(images/Fuji_Quad_Chair_1x._SY116_CB667159060_.jpg);
+    background-size: cover;
+}
+.conopt {
+    align-self: flex-end;
+    color: black;
+    font-size: 12px;
+    height: 14px;
+    margin-left: 10px;
+}
+.see {
+
+    margin: 20px;
+    margin-bottom: 40px;
+    text-decoration: none;
+    color: #007185;
+    font-size: 12px;
+}
+#toys {
+    background-image: url(images/XCM_CUTTLE_1469244_2584128_379x304_1X_en_US._SY304_CB609318944_.jpg);
+    background-size: cover;
+}
+#elect {
+    background-image: url(images/Fuji_Dash_Electronics_1x._SY304_CB432774322_.jpg);
+    background-size: cover;
+}
+#signad {
+    background-color: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#signin {
+    height: 150px;
+    background-color: #ffffff;
+    width: 100%;
+}
+#signb {
+    height: 93px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#signb button {
+    background-color: #ffd000;
+    height: 30px;
+    width: 90%;
+    border: none;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+#ad {
+    background-image: url(images/Fuji_D2_45M_en_US_1x._CB418309979_.jpg);
+    height: 60%;
+    width: 85%;
+    align-self: flex-end;
+    background-size: cover;
+}
+#home {
+    background-image: url(images/XCM_CUTTLE_1469391_2584745_379x304_1X_en_US._SY304_CB609304299_.jpg);
+    background-size: cover;
+}
+#health {
+    background-image: url(images/GW_CONS_AUS_HPC_HPCEssentials_CatCard_Desktop1x._SY304_CB627424361_.jpg);
+    background-size: cover;
+}
+#deals {
+    background-image: url(images/Fuji_Dash_Deals_1x._SY304_CB430401028_.jpg);
+    background-size: cover;
+}
+#beauty {
+    background-image: url(images/Fuji_Dash_Beauty_1x._SY304_CB432774351_.jpg);
+    background-size: cover;
+}
+footer {
+    width: 100%;
+    background-color: #222f3d;
+}
+#footinfo {
+    width: 80%;
+    background-color: #222f3d;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-evenly;
+    height: 400px;
+    border-bottom: 1px solid #dddddd;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+.fbox {
+    margin: 20px;
+    margin-top: 50px;
+    width: auto;
+    height: 318px;
+    color: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
+    
+}
+.fbox p {
+    font-size: 16px;
+    font-weight: 700;
+}
+#know {
+    width: 120px;
+}
+#money {
+    width: 158px;
+}
+#amazon {
+    width: 208px;
+}
+#help {
+    width: 132px;
+}
+.footlist {
+    color: #dddddd;
+    list-style-type: none;
+    padding: 0px;
+    font-size: 14px;
+}
+.footlist li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
