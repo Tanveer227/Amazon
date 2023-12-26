@@ -15,7 +15,7 @@ const products = [
     ]
   },
   {
-    id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+    id: "15b6fc6f-327a-4ec4-896f-486349e85a3q",
     image: "images/products/intermediate-composite-basketball.jpg",
     name: "Intermediate Size Basketball",
     rating: {
@@ -185,19 +185,19 @@ const products = [
   },
   {
     id: "04701903-bc79-49c6-bc11-1af7e3651358",
-    image: "images/products/women-beach-sandals.jpg",
-    name: "Women's Two Strap Buckle Sandals - Tan",
+    image: "images/products/71z42CUeWVL._AC_SL1500_.jpg",
+    name: "Wired Gaming Keyboard with Backlit LED",
     rating: {
       stars: 4.5,
-      count: 562
+      count: 1105
     },
-    priceCents: 2499,
+    priceCents: 2099,
     keywords: [
-      "footwear",
-      "sandals",
-      "womens",
-      "beach",
-      "summer"
+      "gaming",
+      "keyboard",
+      "computer",
+      "XBOX",
+      "PS4"
     ]
   },
   {
@@ -247,19 +247,18 @@ const products = [
   },
   {
     id: "6b07d4e7-f540-454e-8a1e-363f25dbae7d",
-    image: "images/products/facial-tissue-2-ply-18-boxes.jpg",
-    name: "Ultra Soft Tissue 2-Ply - 18 Box",
+    image: "images/products/617AAEmjdbL._AC_SL1000_.jpg",
+    name: "Over Ear Gaming Headset",
     rating: {
       stars: 4,
-      count: 99
+      count: 11116
     },
-    priceCents: 2374,
+    priceCents: 2499,
     keywords: [
-      "kleenex",
-      "tissues",
-      "kitchen",
-      "tissues box",
-      "napkins"
+      "gaming",
+      "headsets",
+      "PS4",
+      "XBOX",
     ]
   },
   {
