@@ -48,7 +48,7 @@ window.onload=function () {
                         </div>
                     </div>
 
-                    <a id="navcart" class="border" href="orders.html">
+                    <a id="navcart" class="border" href="checkout.html">
                         <img class="cartlogo" src="images/cart-icon.png">
                         <div class="cart-quantity"></div>
                         <div class="navtext2 cart">Cart</div>
