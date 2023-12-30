@@ -20,17 +20,17 @@ products.forEach((product) => {
                     <div class="product-price">$${(product.priceCents/100).toFixed(2)}</div>
 
                     <div class="product-quantity-container">
-                        <select>
-                            <option selected value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
+                        <select class="quantity-selector-${product.id}">
+                            <option selected value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                            <option value=6>6</option>
+                            <option value=7>7</option>
+                            <option value=8>8</option>
+                            <option value=9>9</option>
+                            <option value=10>10</option>
                         </select>
                     </div>
 
@@ -54,27 +54,21 @@ window.addEventListener('load', function () {
         .forEach((button) => {
             
             button.addEventListener('click', () => {
+                let quantity=Number(document.querySelector(`.quantity-selector-${button.dataset.productId}`)
+                    .value);
                 let matchingItem;
                 cart.forEach((item) => {
                     //console.log("Added");
                     if(item.productId===button.dataset.productId) matchingItem=item;
                 });
-                if(matchingItem) matchingItem.quantity++;
+                if(matchingItem) matchingItem.quantity+=quantity;
                 else{
-                    cart.push({
-                        productId: button.dataset.productId,
-                        quantity:1
-                    });
+                    insertIntoCart(button.dataset.productId, quantity);
                 }
                 console.log(cart);
-                let precart=JSON.stringify(cart);
-                localStorage.setItem('precart', precart);
-                quantity=0;
-                cart.forEach(item => {
-                    quantity+=item.quantity;
-                });
-                document.querySelector(".cart-quantity")
-                    .innerHTML=`${quantity}`;
+                saveCart();
+
+                updateQuantity();
         });
     });
 });
