@@ -1,5 +1,8 @@
-window.onload=function () {
-    document.querySelector(".js-header")
+import {quantity, updateQuantity} from "/data/cart.js";
+
+updateQuantity();
+
+document.querySelector(".js-header")
     .innerHTML=`
                 <div id="navbar">
 
@@ -9,7 +12,7 @@ window.onload=function () {
                     </a>
 
                     <div class="border navloc">
-                        <p class="navtext1" id="deliver"Deliver to</p>
+                        <p class="navtext1" id="deliver">Deliver to</p>
                         <div class="icon">
                             <i class="fa-solid fa-location-dot"></i>
                             <p id="Country" class="navtext2">India</p>
@@ -50,7 +53,7 @@ window.onload=function () {
 
                     <a id="navcart" class="border" href="checkout.html">
                         <img class="cartlogo" src="images/cart-icon.png">
-                        <div class="cart-quantity"></div>
+                        <div class="cart-quantity">${quantity}</div>
                         <div class="navtext2 cart">Cart</div>
                         <div class="cart-text"></div>
                     </a>
@@ -79,5 +82,4 @@ window.onload=function () {
                             <p class="pantext2">Sell</p>
                         </div>
                     </div>
-                </div>`
-}
+                </div>`;

@@ -1,22 +1,28 @@
+import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
+import {cart, removeItem, updateQuantity, updateDeliveryDate, saveCart, payment, updatePayment, updateShippingPayment, shippingPayment, quantity} from "/data/cart.js";
+import {products, deliveryOptions} from "/data/products.js";
 
+updateQuantity();
+updatePayment();
+updateShippingPayment();
+console.log(shippingPayment);
 function updateProductHTML () {
+
     let productHTML="";
     let productItem;
+
     cart.forEach((cartItem ) => {
         products.forEach((product) => {
             if(cartItem.productId===product.id){
                 productItem=product;
             }
-        })
-        console.log(cartItem.date);
-        const freeDel = (dayjs(cartItem.date).add(4, 'days')).format('dddd, MMMM D');
-        const midDel = (dayjs(cartItem.date).add(3, 'days')).format('dddd, MMMM D');
-        const goodDel = (dayjs(cartItem.date).add(2, 'days')).format('dddd, MMMM D');
+        });
+
         productHTML+=`
                     <div class="cart-item-container">
 
-                        <div class="delivery-date">
-                            Delivery date: Tuesday, June 21
+                        <div class="delivery-date-${productItem.id}">
+                            Delivery date:  
                         </div>
 
                         <div class="cart-item-details-grid">
@@ -52,76 +58,116 @@ function updateProductHTML () {
                                 <div class="delivery-options-title">
                                     Choose a delivery option:
                                 </div>
-
-                                <div class="delivery-option">
-                                    <input type="radio" checked 
-                                        class="delivery-option-input" name="delivery-option-${productItem.id}">
-                                    <div>
-                                        <div class="delivery-option-date">${freeDel}</div>
-
-                                        <div class="delivery-option-price">FREE Shipping</div>
-                                    </div>
-                                </div>
-
-                                <div class="delivery-option">
-                                    <input type="radio"
-                                        class="delivery-option-input" name="delivery-option-${productItem.id}">
-                                    <div>
-                                        <div class="delivery-option-date">${midDel}</div>
-
-                                        <div class="delivery-option-price">$4.99 - Shipping</div>
-                                    </div>
-                                </div>
-
-                                <div class="delivery-option">
-                                    <input type="radio"
-                                        class="delivery-option-input" name="delivery-option-${productItem.id}">
-                                    <div>
-                                        <div class="delivery-option-date">${goodDel}</div>
-
-                                        <div class="delivery-option-price">$9.99 - Shipping</div>
-                                    </div>
-                                </div>
+                                ${updateDeliveryHTML(productItem, cartItem)}
                             </div>
                         </div>
                     </div>`
         
     });
+
     document.querySelector(".order-summary")
             .innerHTML=productHTML;
+    
+    cart.forEach((cartItem ) => {
+        updateDeliveryDate(cartItem);
+    });
     deleteButton();
+    radioButtons();
+    updateButton();
+}
+
+let today=dayjs();
+
+function updateDeliveryHTML(productItem, cartItem) {
+    let deliveryHTML = "";
+    
+    deliveryOptions.forEach((option) => {
+
+        let delDate = today.add(option.deliveryDays, 'days').format('dddd, MMMM D');
+
+        let defaultSelect = "";
+        if(option.id===cartItem.deliveryOptionId) {
+            defaultSelect += "checked";
+        }
+        let price = "";
+        if(option.priceCents) price+=`$${(option.priceCents/100).toFixed(2)} - `;
+        else price+="FREE";
+
+        deliveryHTML += `
+                        <div class="delivery-option" data-product-id="${cartItem.productId}" data-delivery-id="${option.id}">
+                            <input type="radio" ${defaultSelect} 
+                                class="delivery-option-input" name="delivery-option-${productItem.id}">
+                            <div>
+                                <div class="delivery-option-date">${delDate}</div>
+
+                                <div class="delivery-option-price">${price} Shipping</div>
+                            </div>
+                        </div>`;
+    });
+
+    return deliveryHTML;
 }
 
 function deleteButton () {
+
     document.querySelectorAll(".delete-quantity-link")
         .forEach((button) => {
 
             button.addEventListener('click', () => {
-                //console.log("clicked");
-                let matchingItem;
-                cart.forEach((item) => {
-                    //console.log("cws");
-                    if(button.dataset.productId===item.productId){
-                        //console.log(item.productId);
-                        matchingItem=item;
-                    }
-                });
-                if(matchingItem) removeItem(matchingItem.productId);
-                
-                saveCart();
-                updateQuantity();
-                
+
+                removeItem(button.dataset.productId);
                 updateProductHTML();
             });
         });
+        updatePayment();
+        updateShippingPayment();
+        updatePaymentHTML();
 }
-window.addEventListener('load', () => {
-    
-    updateProductHTML();
 
-    deleteButton();
-    updateButton();
-});
+function updatePaymentHTML() {
+    let beforeTax = payment+shippingPayment;
+    let tax = ((beforeTax*18)/100);
+
+    let paymentHTML = `<div class="payment-summary-title">
+                            Order Summary
+                        </div>
+
+                        <div class="payment-summary-row">
+                            <div>Items (${quantity}):</div>
+                            <div class="payment-summary-money">$${(payment/100).toFixed(2)}</div>
+                        </div>
+
+                        <div class="payment-summary-row">
+                            <div>Shipping &amp; handling:</div>
+                            <div class="payment-summary-money">$${(shippingPayment/100).toFixed(2)}</div>
+                        </div>
+
+                        <div class="payment-summary-row subtotal-row">
+                            <div>Total before tax:</div>
+                            <div class="payment-summary-money">$${(beforeTax/100).toFixed(2)}</div>
+                        </div>
+
+                        <div class="payment-summary-row">
+                            <div>Estimated tax (10%):</div>
+                            <div class="payment-summary-money">$${(tax/100).toFixed(2)}</div>
+                        </div>
+
+                        <div class="payment-summary-row total-row">
+                            <div>Order total:</div>
+                            <div class="payment-summary-money">$${((beforeTax+tax)/100).toFixed(2)}</div>
+                        </div>
+
+                        <button class="place-order-button button-primary">Place your order</button>
+                    `;
+    cart.forEach
+    document.querySelector(".payment-summary")
+        .innerHTML = paymentHTML;
+}
+
+updateProductHTML();
+updatePaymentHTML();
+deleteButton();
+updateButton();
 
 function updateButton () {
 
@@ -153,21 +199,29 @@ function updateButton () {
                         updateProductHTML();
                         updateButton();
                     });
-                /*let matchingItem;
-                cart.forEach((item) => {
-                    //console.log("cws");
-                    if(button.dataset.productId===item.productId){
-                        //console.log(item.productId);
-                        matchingItem=item;
-                    }
-                });
-                if(matchingItem) removeItem(matchingItem.productId);
-                
-                saveCart();
-                updateQuantity();
-                
-                updateProductHTML();*/
             });
         });
-    
+        updatePayment();
+        updateShippingPayment();
+        updatePaymentHTML();
+}
+
+function radioButtons() {
+    document.querySelectorAll(".delivery-option")
+        .forEach((element) => {
+            element.addEventListener('click', () => {
+                cart.forEach((cartItem) => {
+                    if(cartItem.productId===element.dataset.productId){
+
+                        cartItem.deliveryOptionId=element.dataset.deliveryId;
+                        saveCart();
+                        updateDeliveryDate(cartItem);
+                        updatePayment();
+        updateShippingPayment();
+        updatePaymentHTML();
+                    } 
+                });
+                
+            });
+        });
 }
